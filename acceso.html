@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso - RUPE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><h1>RUPE</h1><p class="sub">Registro Único de Perritos Extraviados</p></div>
+    <nav><ul><li><a href="index.html">Inicio</a></li><li><a href="acceso.html" class="activo">Acceso</a></li><li><a href="avistamiento.html">Avistamiento</a></li></ul></nav>
+  </header>
+
+  <main>
+    <div class="login-container">
+      <div class="login-card">
+        <!-- Tabs para cambiar entre login y registro -->
+        <div class="tabs">
+          <button class="tab-btn activo" data-tab="tabLogin">Iniciar sesión</button>
+          <button class="tab-btn" data-tab="tabRegister">Registrarse</button>
+        </div>
+
+        <!-- Tab: Iniciar sesión -->
+        <div id="tabLogin" class="tab-content activo">
+          <h2>Iniciar sesión</h2>
+          <p class="login-sub">Ingresa con tu correo y contraseña</p>
+          <div class="login-error" id="loginError"></div>
+          <form id="loginForm">
+            <div class="login-field">
+              <label for="loginEmail">Correo electrónico</label>
+              <input type="email" id="loginEmail" placeholder="tucorreo@ejemplo.com" required>
+            </div>
+            <div class="login-field">
+              <label for="loginPassword">Contraseña</label>
+              <input type="password" id="loginPassword" placeholder="Ingresa tu contraseña" required>
+            </div>
+            <div class="form-accion">
+              <button type="submit" class="btn btn-primario" style="width:100%;">Entrar</button>
+            </div>
+          </form>
+          <div class="login-footer"><a href="#">¿Olvidaste tu contraseña?</a></div>
+        </div>
+
+        <!-- Tab: Registrarse -->
+        <div id="tabRegister" class="tab-content">
+          <h2>Crear cuenta</h2>
+          <p class="login-sub">Regístrate como dueño de mascota</p>
+          <div class="login-error" id="registerError"></div>
+          <div class="success-msg" id="registerSuccess"></div>
+          <form id="registerForm">
+            <div class="login-field"><label for="regNombre">Nombre completo</label><input type="text" id="regNombre" placeholder="Ej: Juan Pérez López" required></div>
+            <div class="login-field"><label for="regCorreo">Correo electrónico</label><input type="email" id="regCorreo" placeholder="tucorreo@ejemplo.com" required></div>
+            <div class="login-field"><label for="regTelefono">Teléfono</label><input type="tel" id="regTelefono" placeholder="Ej: 5512345678" required></div>
+            <div class="login-field"><label for="regPassword">Contraseña</label><input type="password" id="regPassword" placeholder="Mínimo 8 caracteres" minlength="8" required></div>
+            <div class="login-field"><label for="regConfirmar">Confirmar contraseña</label><input type="password" id="regConfirmar" placeholder="Repite la contraseña" required></div>
+            <div class="login-field">
+              <label>CAPTCHA de seguridad</label>
+              <div class="captcha-placeholder"></div>
+            </div>
+            <div class="form-accion"><button type="submit" class="btn btn-primario" style="width:100%;">Crear cuenta</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-sep"><h4>Secretaría de Educación Pública</h4><p>Subsecretaría de Educación Superior</p><p>Universidad Abierta y a Distancia de México</p></div>
+      <div class="footer-sep"><h4>Macroproyecto Terminal</h4><p>Registro Único de Perritos Extraviados (RUPE)</p><p>Arquitectura MVC - Mayo 2026</p></div>
+    </div>
+    <div class="footer-copy"><p>Proyecto con fines académicos. Datos ficticios para pruebas.</p></div>
+  </footer>
+
+  <!-- JavaScript solo para la interfaz de tabs -->
+  <script>
+    /* Cambiar entre pestañas de inicio de sesión y registro */
+    var tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('activo'); });
+        document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('activo'); });
+        btn.classList.add('activo');
+        document.getElementById(btn.dataset.tab).classList.add('activo');
+        document.getElementById('loginError').textContent = '';
+        document.getElementById('registerError').textContent = '';
+        document.getElementById('registerSuccess').textContent = '';
+      });
+    });
+
+    /* Los formularios no envían datos, solo muestran mensaje demo */
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('loginError').textContent = 'Funcionalidad disponible en la versión completa.';
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var error = document.getElementById('registerError');
+      var success = document.getElementById('registerSuccess');
+      error.textContent = '';
+      success.textContent = '';
+      if (document.getElementById('regPassword').value !== document.getElementById('regConfirmar').value) {
+        error.textContent = 'Las contraseñas no coinciden.';
+        return;
+      }
+      success.textContent = 'Registro exitoso. Próximamente podrás iniciar sesión.';
+      document.getElementById('registerForm').reset();
+    });
+  </script>
+</body>
+</html>

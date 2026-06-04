@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportar avistamiento - RUPE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><h1>RUPE</h1><p class="sub">Registro Único de Perritos Extraviados</p></div>
+    <nav><ul><li><a href="index.html">Inicio</a></li><li><a href="acceso.html">Acceso</a></li><li><a href="avistamiento.html" class="activo">Avistamiento</a></li></ul></nav>
+  </header>
+
+  <main>
+    <!-- Título de la página -->
+    <section class="pagina-titulo">
+      <h2>Reportar avistamiento</h2>
+      <p>¿Viste un perro que parece extraviado? Reportalo aquí para ayudar a reunirlo con su familia.</p>
+    </section>
+
+    <!-- Recomendaciones en dos columnas: Qué hacer / Qué NO hacer -->
+    <section class="recomendaciones">
+      <h2>Recomendaciones para quien reporta</h2>
+      <div class="grid-recomendaciones">
+        <div class="recomendacion-card que-hacer">
+          <h3><span class="icono-check">✔</span> QUÉ HACER al encontrar una mascota</h3>
+          <ul>
+            <li><span class="icono-check">✔</span> Mantener la calma y acercarse despacio sin hacer movimientos bruscos ni gritar.</li>
+            <li><span class="icono-check">✔</span> Fotografiar al perro desde distancia para tener evidencia visual del avistamiento.</li>
+            <li><span class="icono-check">✔</span> Buscar en la zona si hay un cartel con código QR pegado en postes o paredes cercanas.</li>
+            <li><span class="icono-check">✔</span> Escanear el QR del cartel y registrar el avistamiento en el sistema con lugar y hora exactos.</li>
+            <li><span class="icono-check">✔</span> Avisar a vecinos y comerciantes de la zona para que estén atentos al perrito.</li>
+            <li><span class="icono-check">✔</span> Si el perrito está en peligro inmediato (tráfico, herido), contactar a la brigada de bienestar animal de la alcaldía correspondiente.</li>
+          </ul>
+        </div>
+        <div class="recomendacion-card no-hacer">
+          <h3><span class="icono-x">✘</span> QUÉ NO HACER al encontrar una mascota</h3>
+          <ul>
+            <li><span class="icono-x">✘</span> No intentar atrapar al perro de golpe: puede asustarse y escapar a una zona de mayor peligro.</li>
+            <li><span class="icono-x">✘</span> No ofrecer comida desconocida al animal: puede tener alergias o dietas especiales indicadas por el veterinario.</li>
+            <li><span class="icono-x">✘</span> No retener al perro en tu casa sin reportarlo primero en el sistema: el dueño puede estar buscándolo.</li>
+            <li><span class="icono-x">✘</span> No intentar leer el microchip sin equipo adecuado: ve a una veterinaria o a la brigada de bienestar animal.</li>
+            <li><span class="icono-x">✘</span> No ignorar al perro si está en una zona de riesgo: un reporte en el sistema puede salvar su vida.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulario de avistamiento -->
+    <section class="formulario-seccion">
+      <form id="formAvistamiento">
+        <div class="form-grupo">
+          <h3>Datos de quien reporta (opcional)</h3>
+          <div class="form-campos">
+            <label>Tu nombre <input type="text" id="avistadorNombre"></label>
+            <label>Correo electrónico <input type="email" id="avistadorEmail"></label>
+          </div>
+        </div>
+
+        <div class="form-grupo">
+          <h3>Datos del perro observado</h3>
+          <div class="form-campos">
+            <!-- Folio se llena automáticamente si viene desde QR (?folio=) -->
+            <label>Folio del reporte (si tiene código QR)
+              <input type="text" id="folioInput" placeholder="Ej: RUPE-000001">
+            </label>
+            <div class="form-row">
+              <label>Fecha del avistamiento <input type="date" id="avistamientoFecha" required></label>
+              <label>Hora aproximada <input type="time" id="avistamientoHora"></label>
+            </div>
+            <div class="form-row">
+              <label>Alcaldía
+                <select id="avistamientoAlcaldia" required>
+                  <option value="">Selecciona</option>
+                  <option>Álvaro Obregón</option>
+                  <option>Azcapotzalco</option>
+                  <option>Benito Juárez</option>
+                  <option>Coyoacán</option>
+                  <option>Cuajimalpa de Morelos</option>
+                  <option>Cuauhtémoc</option>
+                  <option>Gustavo A. Madero</option>
+                  <option>Iztacalco</option>
+                  <option>Iztapalapa</option>
+                  <option>La Magdalena Contreras</option>
+                  <option>Miguel Hidalgo</option>
+                  <option>Milpa Alta</option>
+                  <option>Tláhuac</option>
+                  <option>Tlalpan</option>
+                  <option>Venustiano Carranza</option>
+                  <option>Xochimilco</option>
+                </select>
+              </label>
+              <label>Colonia <input type="text" id="avistamientoColonia" required></label>
+            </div>
+            <label>Calle o ubicación exacta donde fue visto
+              <input type="text" id="avistamientoCalle" placeholder="Ej: Av. Tláhuac esq. Eje 6, frente al OXXO" required>
+            </label>
+            <label>Descripción del perro
+              <textarea id="avistamientoDesc" rows="3" placeholder="Color, tamaño, señas particulares, estado físico..." required></textarea>
+            </label>
+            <label>Fotografía del perro <input type="file" id="avistamientoFoto" accept="image/*"></label>
+            <label>Tipo de reporte
+              <select id="avistamientoTipo">
+                <option value="avistamiento">Solo lo vi (avistamiento)</option>
+                <option value="resguardo">Lo resguardé</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-accion">
+          <button type="submit" class="btn btn-primario">Reportar avistamiento</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-sep"><h4>Secretaría de Educación Pública</h4><p>Subsecretaría de Educación Superior</p><p>Universidad Abierta y a Distancia de México</p></div>
+      <div class="footer-sep"><h4>Macroproyecto Terminal</h4><p>Registro Único de Perritos Extraviados (RUPE)</p><p>Arquitectura MVC - Mayo 2026</p></div>
+    </div>
+    <div class="footer-copy"><p>Proyecto con fines académicos. Datos ficticios para pruebas.</p></div>
+  </footer>
+
+  <!-- JavaScript solo para UI: fecha por defecto y alerta demo -->
+  <script>
+    /* Poner la fecha de hoy por defecto */
+    document.getElementById('avistamientoFecha').valueAsDate = new Date();
+
+    /* Si viene desde un QR con ?folio=RUPE-XXXXX, se auto-llena el campo */
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('folio')) {
+      document.getElementById('folioInput').value = params.get('folio');
+    }
+
+    /* Formulario demo: solo muestra mensaje sin enviar datos */
+    document.getElementById('formAvistamiento').addEventListener('submit', function(e) {
+      e.preventDefault();
+      /* Demo: aquí se enviarían los datos al servidor */
+      var folio = document.getElementById('folioInput').value.trim();
+      var msg = folio ? 'Avistamiento reportado para el folio ' + folio + '.'
+                      : 'Avistamiento reportado. Gracias por ayudar.';
+      alert('【DEMO】\n\n' + msg);
+    });
+  </script>
+</body>
+</html>
